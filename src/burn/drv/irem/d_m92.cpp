@@ -4053,3 +4053,82 @@ struct BurnDriver BurnDrvSkingame2 = {
 	320, 240, 4, 3
 };
 
+
+//============================================================
+// Add Hack Roms
+//============================================================
+
+// Undercover Cops (Korea)
+
+static struct BurnRomInfo uccopskRomDesc[] = {
+	{ "uc_h0_a.ic28",	0x040000, 0x9e17cada, 1 | BRF_PRG | BRF_ESS }, //  0 V33 Code
+	{ "uc_l0_a.ic39",	0x040000, 0x4a4e3208, 1 | BRF_PRG | BRF_ESS }, //  1
+	{ "uck_h1_a.ic27",	0x020000, 0x891c0678, 1 | BRF_PRG | BRF_ESS }, //  2
+	{ "uck_l1_a.ic38",	0x020000, 0x77beea06, 1 | BRF_PRG | BRF_ESS }, //  3
+
+	{ "uc_sh0.ic30",	0x010000, 0xf0ca1b03, 2 | BRF_PRG | BRF_ESS }, //  4 V30 Code
+	{ "uc_sl0.ic31",	0x010000, 0xd1661723, 2 | BRF_PRG | BRF_ESS }, //  5
+
+	{ "uck_c0.ic26",	0x080000, 0xdc672f1b, 3 | BRF_GRA },           //  6 Background Tiles
+	{ "uck_c1.ic25",	0x080000, 0xbb73ca75, 3 | BRF_GRA },           //  7
+	{ "uc_c2.ic24",		0x080000, 0x96397ac6, 3 | BRF_GRA },           //  8
+	{ "uc_c3.ic23",		0x080000, 0x5d07d10d, 3 | BRF_GRA },           //  9
+
+	{ "uc_030.ic37",	0x100000, 0x97f7775e, 4 | BRF_GRA },           // 10 Sprites
+	{ "uc_020.ic36",	0x100000, 0x5e0b1d65, 4 | BRF_GRA },           // 11
+	{ "uc_010.ic35",	0x100000, 0xbdc224b3, 4 | BRF_GRA },           // 12
+	{ "uc_000.ic34",	0x100000, 0x7526daec, 4 | BRF_GRA },           // 13
+
+	{ "uc_da.bin",		0x080000, 0x0b2855e9, 5 | BRF_SND },           // 14 Irem GA20 Samples
+};
+
+STD_ROM_PICK(uccopsk)
+STD_ROM_FN(uccopsk)
+
+struct BurnDriver BurnDrvUccopsk = {
+	"uccopsk", "uccops", NULL, NULL, "1992",
+	"Undercover Cops (Korea)\0", "Hack", "Irem", "Irem M92",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_IREM_M92, GBF_SCRFIGHT, 0,
+	NULL, uccopskRomInfo, uccopskRomName, NULL, NULL, NULL, NULL, p3CommonInputInfo, UccopsDIPInfo,
+	uccopsInit, DrvExit, DrvFrame, DrvReDraw, DrvScan, &bRecalcPalette, 0x800,
+	320, 240, 4, 3
+};
+
+
+// Yakyuu Kakutou League-Man (Korea)
+
+static struct BurnRomInfo leaguemkRomDesc[] = {
+	{ "lma1k-h0.34",	0x040000, 0x738c9356, 1 | BRF_PRG | BRF_ESS }, //  0 V33 Code
+	{ "lma1k-l0.31",	0x040000, 0xc540c3a6, 1 | BRF_PRG | BRF_ESS }, //  1
+	{ "a1-h1-.33",		0x040000, 0x3ce2aab5, 1 | BRF_PRG | BRF_ESS }, //  2
+	{ "a1-l1-.32",		0x040000, 0x116d9bcc, 1 | BRF_PRG | BRF_ESS }, //  3
+
+	{ "a1-sh0-.14",		0x010000, 0xb7fae3e6, 2 | BRF_PRG | BRF_ESS }, //  4 V30 Code
+	{ "a1-sl0-.17",		0x010000, 0xb26d54fc, 2 | BRF_PRG | BRF_ESS }, //  5
+
+	{ "lh534k0ck.9",	0x080000, 0x9015f7d9, 3 | BRF_GRA },           //  6 Background Tiles
+	{ "lh534k0ek.10",	0x080000, 0xd93e5593, 3 | BRF_GRA },           //  7
+	{ "lh534k0fk.11",	0x080000, 0xce824cc3, 3 | BRF_GRA },           //  8
+	{ "lh534k0gk.12",	0x080000, 0xe90050fa, 3 | BRF_GRA },           //  9
+
+	{ "lh538393k.42",	0x100000, 0x66248464, 4 | BRF_GRA },           // 10 Sprites
+	{ "lh538394k.43",	0x100000, 0xa7a0963b, 4 | BRF_GRA },           // 11
+	{ "lh538395k.44",	0x100000, 0x3f096442, 4 | BRF_GRA },           // 12
+	{ "lh538396k.45",	0x100000, 0x970ec749, 4 | BRF_GRA },           // 13
+
+	{ "lh534k0k.8",		0x080000, 0x735e6380, 5 | BRF_SND },           // 14 Irem GA20 Samples
+};
+
+STD_ROM_PICK(leaguemk)
+STD_ROM_FN(leaguemk)
+
+struct BurnDriver BurnDrvLeaguemk = {
+	"leaguemk", "nbbatman", NULL, NULL, "1993",
+	"Yakyuu Kakutou League-Man (Korea)\0", "Hack", "Irem", "Irem M92",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 4, HARDWARE_IREM_M92, GBF_SCRFIGHT, 0,
+	NULL, leaguemkRomInfo, leaguemkRomName, NULL, NULL, NULL, NULL, nbbatmanInputInfo, NbbatmanDIPInfo,
+	nbbatmanInit, DrvExit, DrvFrame, DrvReDraw, DrvScan, &bRecalcPalette, 0x800,
+	320, 240, 4, 3
+};
