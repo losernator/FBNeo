@@ -646,6 +646,34 @@ static struct BurnInputInfo MpangInputList[] = {
 
 STDINPUTINFO(Mpang)
 
+static struct BurnInputInfo PnsInputList[] = {
+	{"P1 Coin"          , BIT_DIGITAL  , CpsInp020+4, "p1 coin"   },
+	{"P1 Start"         , BIT_DIGITAL  , CpsInp020+0, "p1 start"  },
+	{"P1 Up"            , BIT_DIGITAL  , CpsInp001+3, "p1 up"     },
+	{"P1 Down"          , BIT_DIGITAL  , CpsInp001+2, "p1 down"   },
+	{"P1 Left"          , BIT_DIGITAL  , CpsInp001+1, "p1 left"   },
+	{"P1 Right"         , BIT_DIGITAL  , CpsInp001+0, "p1 right"  },
+	{"P1 Attack"        , BIT_DIGITAL  , CpsInp001+4, "p1 fire 1" },
+	{"P1 Jump"          , BIT_DIGITAL  , CpsInp001+5, "p1 fire 2" },
+
+	{"P2 Coin"          , BIT_DIGITAL  , CpsInp020+5, "p2 coin"   },
+	{"P2 Start"         , BIT_DIGITAL  , CpsInp020+1, "p2 start"  },
+	{"P2 Up"            , BIT_DIGITAL  , CpsInp000+3, "p2 up"     },
+	{"P2 Down"          , BIT_DIGITAL  , CpsInp000+2, "p2 down"   },
+	{"P2 Left"          , BIT_DIGITAL  , CpsInp000+1, "p2 left"   },
+	{"P2 Right"         , BIT_DIGITAL  , CpsInp000+0, "p2 right"  },
+	{"P2 Attack"        , BIT_DIGITAL  , CpsInp000+4, "p2 fire 1" },
+	{"P2 Jump"          , BIT_DIGITAL  , CpsInp000+5, "p2 fire 2" },
+
+	{"Reset"            , BIT_DIGITAL  , &CpsReset  , "reset"     },
+	{"Diagnostic"       , BIT_DIGITAL  , CpsInp021+1, "diag"      },
+	{"Service"          , BIT_DIGITAL  , CpsInp021+2, "service"   },
+	{"Volume Up"        , BIT_DIGITAL  , &Cps2VolUp , "p1 fire 4" },
+	{"Volume Down"      , BIT_DIGITAL  , &Cps2VolDwn, "p1 fire 5" },
+};
+
+STDINPUTINFO(Pns)
+
 static struct BurnInputInfo ProgearInputList[] = {
 	{"P1 Coin"          , BIT_DIGITAL  , CpsInp020+4, "p1 coin"   },
 	{"P1 Start"         , BIT_DIGITAL  , CpsInp020+0, "p1 start"  },
@@ -14220,6 +14248,42 @@ struct BurnDriver BurnDrvCpsAvspk = {
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS2, GBF_SCRFIGHT, 0,
 	NULL, AvspkRomInfo, AvspkRomName, NULL, NULL, NULL, NULL, AvspInputInfo, NULL,
+	Cps2Init, DrvExit, Cps2Frame, CpsRedraw, CpsAreaScan,
+	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
+};
+
+static struct BurnRomInfo AvspakRomDesc[] = {
+	{ "avpak.03d",      0x080000, 0x6b22b569, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
+	{ "avpak.04d",      0x080000, 0x50f3301c, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
+	{ "avpk.05d",       0x080000, 0xd91a8dd6, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
+	{ "avp.06",        0x080000, 0x190b817f, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
+
+	{ "avp.13m",       0x200000, 0x8f8b5ae4, CPS2_GFX | BRF_GRA },
+	{ "avp.15m",       0x200000, 0xb00280df, CPS2_GFX | BRF_GRA },
+	{ "avp.17m",       0x200000, 0x94403195, CPS2_GFX | BRF_GRA },
+	{ "avp.19m",       0x200000, 0xe1981245, CPS2_GFX | BRF_GRA },
+	{ "avpk.14m",       0x100000, 0x9f2d4e17, CPS2_GFX | BRF_GRA },
+	{ "avpk.16m",       0x100000, 0x39cf7494, CPS2_GFX | BRF_GRA },
+	{ "avpk.18m",       0x100000, 0x88959e0f, CPS2_GFX | BRF_GRA },
+	{ "avpk.20m",       0x100000, 0x58f7d1ee, CPS2_GFX | BRF_GRA },
+
+	{ "avp.01",        0x020000, 0x2d3b4220, CPS2_PRG_Z80 | BRF_ESS | BRF_PRG },
+	
+	{ "avp.11m",       0x200000, 0x83499817, CPS2_QSND | BRF_SND },
+	{ "avp.12m",       0x200000, 0xf4110d49, CPS2_QSND | BRF_SND },
+	
+	{ "avspa.key",     0x000014, 0x728efc00, CPS2_ENCRYPTION_KEY },
+};
+
+STD_ROM_PICK(Avspak)
+STD_ROM_FN(Avspak)
+
+struct BurnDriver BurnDrvCpsAvspak = {
+	"avspak", "avsp", NULL, NULL, "1994",
+	"Alien vs Predator (940520 Korea, Type A)\0", "Hack", "Capcom", "CPS2",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS2, GBF_SCRFIGHT, 0,
+	NULL, AvspakRomInfo, AvspakRomName, NULL, NULL, NULL, NULL, AvspInputInfo, NULL,
 	Cps2Init, DrvExit, Cps2Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
 };
